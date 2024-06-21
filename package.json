@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-2024",
+  "version": "1.0.0",
+  "description": "NodeJS starter lesson",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodeJS",
+    "javaScript",
+    "html",
+    "css/scss"
+  ],
+  "author": "Madaminov Behruz",
+  "license": "ISC"
+}
