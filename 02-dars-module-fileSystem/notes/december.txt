@@ -1,0 +1,2 @@
+Asinxron va Sinxron Usullar. 
+Asinxron usullar: Bu usullar callback funksiyalari orqali ishlaydi. Bu usullar bloklanmaydi, ya'ni Node.js boshqa kodlarni bajarishda davom etadi.
