@@ -1,4 +1,5 @@
 const Events = require("events");
+const fs = require("fs");
 
 // Logger classiga extends yani voris sifatida Eventsni olish
 // voris bolganidan song Events dagi barcha methodlar Loggerga ham otadi
@@ -23,3 +24,15 @@ logger.on("calculate", (data) => {
 // class ichidagi logni ishga tushirib beradi
 // ! hardoim class functioni class on dan kegin yozish kerak
 logger.log(1, 99);
+
+// file o'qish eventi
+const myEmitter = new Events();
+
+myEmitter.on("fileRead", (data) => {
+  console.log("Fayl o'qildi:", data);
+});
+
+fs.readFile("example.txt", "utf8", (err, data) => {
+  if (err) throw new Error();
+  myEmitter.emit("fileRead", data);
+});
