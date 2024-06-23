@@ -11,8 +11,8 @@ const path = require("path");
 
 // console.log(path.parse(__filename));
 // console.log(path.join(__dirname, "template", "index.html")); // "filelarni yolarini dinamik tarzda birlashtiradi"
-console.log(path.resolve(__dirname, "temp", "index.js")); // "bu mathod ham join() ni o'zi lekin bu methodda root qilib fileni o'zini bersa bo'ladi"
-console.log(path.resolve(__dirname, "temp", "/index.js")); // "ROOT"
+// console.log(path.resolve(__dirname, "temp", "index.js")); // "bu mathod ham join() ni o'zi lekin bu methodda root qilib fileni o'zini bersa bo'ladi"
+// console.log(path.resolve(__dirname, "temp", "/index.js")); // "ROOT"
 
 const testPath = path.join(__dirname, "temp", "index.scss");
 console.log(path.parse(testPath));

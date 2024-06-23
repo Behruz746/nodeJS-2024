@@ -19,6 +19,11 @@ const path = require("path");
 let textFileData = `Asinxron va Sinxron Usullar. \n`;
 let textFileApp = `Asinxron usullar: Bu usullar callback funksiyalari orqali ishlaydi. Bu usullar bloklanmaydi, ya'ni Node.js boshqa kodlarni bajarishda davom etadi.`;
 
+// create folder
+fs.mkdir(path.join(__dirname, "notes"), { recursive: true }, (err) => {
+  if (err) throw err;
+});
+
 // file yaratish va ichiga malumot kirgazish
 fs.writeFile(
   path.join(__dirname, "notes", "december.txt"),
