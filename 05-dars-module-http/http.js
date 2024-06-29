@@ -1,21 +1,25 @@
 const http = require("http");
-// server porti
-let PORT = 8000;
+const PORT = 8000;
 
-// server yaratish
-const server = http.createServer((request, respons) => {
-  // request - serverga so'rov
-  // respons - server javobi
+// server saqlovchisiga http module methodi createServer() orqali server yaratish
+// 1 request - serverga berilgan savol
+// 2 response - serverdan qaytgan javob
+const server = http.createServer((request, response) => {
+  console.log(request.url);
 
-  console.log(request.url); // server page url
+  // page htmlga malumot chiqarish
+  response.write(`<h1 style="color: yellowgreen;">Hello World</h1>`);
 
-  // server dna javob
-  respons.write("<h1>Hello World</h1>");
-  // serverdan javob kelsa stop qilish
-  respons.end();
+  // serverda barcha functionlar bajarilgan dan so'ng end() methodin ichaqirish kerak
+  // chaqirilmasa server takroriy ravishda functionlarni qayta qayta bajaradi
+  response.end();
 });
 
-// serverga port beradi
+// serverni kuzatish uchun listen methodi
+// 1 PORT - 8000
+// 2 callBack function server isga tushganin bildirish uchun
 server.listen(PORT, () => {
-  console.log(`server ishga tushi port: ${PORT}, link: http://localhost:8000/`);
+  console.log(
+    `server is runing with port: ${PORT} server: http://localhost:8000/`
+  );
 });
