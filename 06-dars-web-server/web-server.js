@@ -1,4 +1,7 @@
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
+
 const PORT = 3000;
 
 const server = http.createServer((request, response) => {
@@ -8,13 +11,34 @@ const server = http.createServer((request, response) => {
     // yozayotgam malumotimiz qanday turligini yozish text/html
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
 
-    response.end(`
-        <h1>Send Name</h1>
-        <form method="post" action="/">
-            <input name="name" type="text" />
-            <button type="submit">Submit</button>
-        </form>
-    `);
+    if (request.url === "/") {
+      fs.readFile(
+        path.join(__dirname, "templates", "index.html"),
+        "utf-8",
+        (err, content) => {
+          if (err) throw err;
+          response.end(content);
+        }
+      );
+    } else if (request.url === "/about") {
+      fs.readFile(
+        path.join(__dirname, "templates", "about.html"),
+        "utf-8",
+        (err, content) => {
+          if (err) throw err;
+          response.end(content);
+        }
+      );
+    } else if (request.url === "/contact") {
+      fs.readFile(
+        path.join(__dirname, "templates", "contact.html"),
+        "utf-8",
+        (err, content) => {
+          if (err) throw err;
+          response.end(content);
+        }
+      );
+    }
   } else if (request.method === "POST") {
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     const body = [];
