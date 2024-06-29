@@ -45,7 +45,7 @@ fs.writeFile(
 
         // fileni ichidagi malumotni o'qish
         fs.readFile(
-          path.join(__dirname, "notes", "december.txt"),
+          path.join(__dirname, "notes", "december.txt"), "utf-8",
           (err, data) => {
             if (err) throw new Error();
 

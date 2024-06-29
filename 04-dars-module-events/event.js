@@ -1,38 +1,42 @@
-const Events = require("events");
-const fs = require("fs");
+const Events = require("events"); // events
+const fs = require("fs"); // file systems
 
-// Logger classiga extends yani voris sifatida Eventsni olish
-// voris bolganidan song Events dagi barcha methodlar Loggerga ham otadi
+// Event  Logger classga voris bo'ladi Eventsdagi methodlar Loggerga o'tadi
 class Logger extends Events {
-  // Logger ichida function yaratish
   log(a, b) {
-    // emit() agar log ishga tushsa emitdagi malumotni ko'rsatadi
-    // function ichida emit eventini qilish va nome berish "calculate" yana eventga funtion yozish yani "a + b"
-    this.emit("calculate", a + b);
+    // Events dan emit() methodini oldik
+    // 1 'calc' emit() methodini nomi
+    // 2 hodisa a va b qo'shilishi
+    this.emit("calc", a + b);
   }
 }
 
-// Logger classini logger saqlovchisiga exemplat qilib olish
+// Logger class logger saqlovchiga vorish bo'ladi va Logger methodlari kelib tushadi
 const logger = new Logger();
 
-// logger orqali on() methodini chaqirish
-// on() methodi ishituvchi uni ichga emit() nomi yani "calculate" va callback function malumotlarni ko'rsatish uchun
-logger.on("calculate", (data) => {
+// logger dan on() methodini yozdik bu method kuzatadi funtion ishlashini
+// 1 ishlashi kerak bo'lgan method nomi bizning holda emit() dagi "calc"
+// 2 callback function va data ichida emit() dan malumot keladi
+logger.on("calc", (data) => {
   console.log(data);
 });
 
-// class ichidagi logni ishga tushirib beradi
-// ! hardoim class functioni class on dan kegin yozish kerak
+// functioni ishga tushurish va functionga parametorlar berish
 logger.log(1, 99);
 
-// file o'qish eventi
+// myEmitter saqlovchisi Eventsga voris bolyapti va
+//  hamma methodlarini o'zlashtiryapti
 const myEmitter = new Events();
 
+//
 myEmitter.on("fileRead", (data) => {
   console.log("Fayl o'qildi:", data);
 });
 
+// fs module orqali fileni readFile qilyapmiz yani fileni o'qiyapmiz
 fs.readFile("example.txt", "utf8", (err, data) => {
   if (err) throw new Error();
+  // file malumotlarini myEmitter saqlovchisidagi emit
+  // methodi orqali on methoga beryapmiz va consolga file data chiqyapti
   myEmitter.emit("fileRead", data);
 });

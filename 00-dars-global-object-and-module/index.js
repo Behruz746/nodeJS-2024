@@ -7,4 +7,4 @@ carLogger();
 
 // console.log("Hello NodeJS");
 // console.log("__dirname: ", __dirname);
-// console.log("__filename: ", __filename);
+console.log("__filename: ", __filename);
