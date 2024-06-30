@@ -38,6 +38,16 @@ const server = http.createServer((request, response) => {
           response.end(content);
         }
       );
+    } else if (request.url === "/api/admin") {
+      response.writeHead(200, { "Content-Type": "text/json" });
+
+      const admin = {
+        name: "Behruz",
+        surName: "Madaminov",
+        job: "frontend developer",
+      };
+
+      response.end(JSON.stringify(admin));
     }
   } else if (request.method === "POST") {
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
