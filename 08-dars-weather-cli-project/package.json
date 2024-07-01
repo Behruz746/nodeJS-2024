@@ -1,0 +1,17 @@
+{
+  "name": "08-dars-weather-cli-project",
+  "version": "1.0.0",
+  "description": "create weather with cli",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Behruz Madaminov",
+  "license": "ISC",
+  "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
+    "nodemon": "^3.1.4"
+  }
+}
