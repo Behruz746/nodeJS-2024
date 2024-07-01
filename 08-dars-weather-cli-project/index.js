@@ -1,4 +1,5 @@
-const getArgs = require("./helpers/args");
+import { printErr, printSucc, printHelp } from "./service/log.service.js";
+import getArgs from "./helpers/args.js";
 
 // startCLI function
 const startCLI = () => {
@@ -6,12 +7,8 @@ const startCLI = () => {
   // getArgs argumentiga process.argv beramiz bu terminaldan keladigan commandalar bo'ladi
   const args = getArgs(process.argv);
 
-  console.log(args);
-
   // agarda args objdagi h propertysi true bolsa termilarga Help functioni ishlaydi
-  if (args.h) {
-    console.log("help");
-  }
+  if (args.h) printHelp();
 
   // agarda args objdagi s propertysi true bo'lsa berilgan city saqlanadi
   if (args.s) {
