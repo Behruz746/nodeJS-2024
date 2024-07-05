@@ -1,5 +1,5 @@
 import { printErr, printSucc, printHelp } from "./service/log.service.js";
-import { saveKeyValue } from "./service/storage.service.js";
+import { getKeyValue, saveKeyValue } from "./service/storage.service.js";
 import getArgs from "./helpers/args.js";
 import { TOKEN_DICTIONARY } from "./service/storage.service.js";
 import { getWeather } from "./service/api.service.js";
@@ -20,10 +20,27 @@ const saveToken = async (token) => {
   }
 };
 
+const saveCity = async (city) => {
+  if (!city.length) {
+    printErr("City doesn't extist");
+    return;
+  }
+
+  try {
+    // agar xato bolmasa saveKeyValue functionga tokenlarni beramiz
+    await saveKeyValue(TOKEN_DICTIONARY.city, city);
+    printSucc("City was saved");
+    // agar xato bolsa terminalga xato deb chiqaramiz
+  } catch (error) {
+    printErr(error.message);
+  }
+};
+
 // serverdan malumot olyotganda xato kelta xatoturini consolega chiqarish xato bolmasa kelgan malumotni chiqarish
 const getForcast = async () => {
   try {
-    const res = await getWeather(process.env.CITY ?? "uzun");
+    const city = process.env.CITY ?? (await getKeyValue(TOKEN_DICTIONARY.city));
+    const res = await getWeather(city);
     console.log(res);
   } catch (error) {
     if (error?.response?.status == 404) {
@@ -46,15 +63,11 @@ const startCLI = () => {
   if (args.h) printHelp();
 
   // agarda args objdagi s propertysi true bo'lsa berilgan city saqlanadi
-  if (args.s) {
-    console.log("save city");
-  }
+  if (args.s) saveCity(args.s);
 
   // agarda args objdagi t propertysi true bo'lsa berilgan token saqlanadi
-  if (args.t) {
-    // tokeni o'zgartirish
-    return saveToken(args.t);
-  }
+  // tokeni o'zgartirish
+  if (args.t) saveToken(args.t);
 
   getForcast();
   // result
