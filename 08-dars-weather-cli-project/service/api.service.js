@@ -1,6 +1,38 @@
 import axios from "axios";
 import { getKeyValue, TOKEN_DICTIONARY } from "./storage.service.js";
 
+const getIcon = (icon) => {
+  switch (icon.slice(0, -1)) {
+    case "01":
+      return "☀️";
+      break;
+    case "02":
+      return "🌤️";
+      break;
+    case "03":
+      return "⛅";
+      break;
+    case "04":
+      return "🌥️";
+      break;
+    case "09":
+      return "🌧️";
+      break;
+    case "10":
+      return "🌦️";
+      break;
+    case "11":
+      return "🌨️";
+      break;
+    case "13":
+      return "❄️";
+      break;
+    case "50":
+      return "🌨️❄️";
+      break;
+  }
+};
+
 const getWeather = async (city) => {
   // api url
   const URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -13,8 +45,6 @@ const getWeather = async (city) => {
   if (!token) {
     throw new Error("API doesn't exist, -t [API_KEY] for saveing token");
   }
-
-  console.log(token);
 
   const { data } = await axios.get(
     // api url
@@ -34,9 +64,7 @@ const getWeather = async (city) => {
     }
   );
 
-  console.log(data);
-
   return data;
 };
 
-export { getWeather };
+export { getWeather, getIcon };
