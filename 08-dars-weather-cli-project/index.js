@@ -20,14 +20,27 @@ const saveToken = async (token) => {
   }
 };
 
+// serverdan malumot olyotganda xato kelta xatoturini consolega chiqarish xato bolmasa kelgan malumotni chiqarish
+const getForcast = async () => {
+  try {
+    const res = await getWeather(process.env.CITY ?? "uzun");
+    console.log(res);
+  } catch (error) {
+    if (error?.response?.status == 404) {
+      printErr("City not found");
+    } else if (error?.response?.status == 401) {
+      printErr("Invalid token");
+    } else {
+      printErr(error?.message);
+    }
+  }
+};
+
 // startCLI function
 const startCLI = () => {
   // getArgs dan qaytgan object malumotlarini args saqlovchisiga olish
   // getArgs argumentiga process.argv beramiz bu terminaldan keladigan commandalar bo'ladi
   const args = getArgs(process.argv);
-
-  console.log(process.env);
-  console.log(args);
 
   // agarda args objdagi h propertysi true bolsa termilarga Help functioni ishlaydi
   if (args.h) printHelp();
@@ -43,7 +56,7 @@ const startCLI = () => {
     return saveToken(args.t);
   }
 
-  getWeather(process.env.CITY ?? "uzun");
+  getForcast();
   // result
 };
 
