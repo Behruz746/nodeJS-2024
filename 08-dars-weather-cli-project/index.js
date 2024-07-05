@@ -1,5 +1,5 @@
 import { printErr, printSucc, printHelp } from "./service/log.service.js";
-import { getKeyValue, saveKeyValue } from "./service/storage.service.js";
+import { saveKeyValue } from "./service/storage.service.js";
 import getArgs from "./helpers/args.js";
 import { TOKEN_DICTIONARY } from "./service/storage.service.js";
 import { getWeather } from "./service/api.service.js";
@@ -42,7 +42,7 @@ const startCLI = () => {
     return saveToken(args.t);
   }
 
-  getWeather("uzbekistan");
+  getWeather("uzun");
   // result
 };
 
