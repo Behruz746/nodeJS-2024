@@ -26,6 +26,7 @@ const startCLI = () => {
   // getArgs argumentiga process.argv beramiz bu terminaldan keladigan commandalar bo'ladi
   const args = getArgs(process.argv);
 
+  console.log(process.env);
   console.log(args);
 
   // agarda args objdagi h propertysi true bolsa termilarga Help functioni ishlaydi
@@ -42,7 +43,7 @@ const startCLI = () => {
     return saveToken(args.t);
   }
 
-  getWeather("uzun");
+  getWeather(process.env.CITY ?? "uzun");
   // result
 };
 

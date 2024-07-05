@@ -6,7 +6,8 @@ const getWeather = async (city) => {
   const URL = "https://api.openweathermap.org/data/2.5/weather";
 
   // boshqa filedan tokini olish
-  const token = await getKeyValue(TOKEN_DICTIONARY.token);
+  const token =
+    process.env.TOKEN ?? (await getKeyValue(TOKEN_DICTIONARY.token));
 
   // agar token bo'lsa serverga so'rov jo'natish
   if (!token) {
@@ -32,7 +33,9 @@ const getWeather = async (city) => {
       },
     }
   );
-  
+
+  console.log(data);
+
   return data;
 };
 
