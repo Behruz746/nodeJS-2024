@@ -5,6 +5,11 @@ import fs from "fs";
 // weather malumotlarini saqlash uchun file pathi
 const filePath = path.join(os.homedir(), "weather-data.json");
 
+const TOKEN_DICTIONARY = {
+  token: "token",
+  city: "city",
+};
+
 const saveKeyValue = async (key, value) => {
   // hamma malumotlar datag kelib tushadi
   let data = {};
@@ -53,4 +58,4 @@ const isExist = async (path) => {
   }
 };
 
-export { saveKeyValue, getKeyValue };
+export { saveKeyValue, getKeyValue, TOKEN_DICTIONARY };

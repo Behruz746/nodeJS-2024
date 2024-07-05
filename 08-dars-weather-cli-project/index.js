@@ -1,11 +1,18 @@
 import { printErr, printSucc, printHelp } from "./service/log.service.js";
-import { saveKeyValue } from "./service/storage.service.js";
+import { getKeyValue, saveKeyValue } from "./service/storage.service.js";
 import getArgs from "./helpers/args.js";
+import { TOKEN_DICTIONARY } from "./service/storage.service.js";
+import { getWeather } from "./service/api.service.js";
 
 const saveToken = async (token) => {
-  // agar xato bolmasa saveKeyValue functionga tokenlarni beramiz
+  if (!token.length) {
+    printErr("Token doesn't extist");
+    return;
+  }
+
   try {
-    await saveKeyValue("token", token);
+    // agar xato bolmasa saveKeyValue functionga tokenlarni beramiz
+    await saveKeyValue(TOKEN_DICTIONARY.token, token);
     printSucc("Token was saved");
     // agar xato bolsa terminalga xato deb chiqaramiz
   } catch (error) {
@@ -35,6 +42,7 @@ const startCLI = () => {
     return saveToken(args.t);
   }
 
+  getWeather("uzbekistan");
   // result
 };
 
